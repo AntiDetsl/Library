@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Library.PL.WebPL.Models.Patent.DisplayPatentVM>
+
+@{
+    ViewData["Title"] = "Patents";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Patents</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-success" asp-controller="Patent" asp-action="Create">
+                Create new patent
+            </a>
+        </div>
+    </div>
+</div>
+
+<table class="table table-active" style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col" style="width:35%">    
+          Name
+      </th>
+      <th scope="col" style="width:35%">
+          Issue date
+      </th>
+      <th scope="col" style="width:30%">
+          Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var obj in Model)
+      {
+        <tr class="table-primary">
+                <td style="width:35%">
+                    @obj.Name
+                </td>
+                <td style="width:35%">
+                    @obj.PublicationDate.ToString("dd/MM/yyyy")
+                </td>
+                <td style="width:30%">
+                    <a class="btn btn-primary d-inline-block" asp-action="Details" asp-route-id="@obj.ID">Details</a>
+                    <a class="btn btn-danger d-inline-block" asp-action="Delete" asp-route-id="@obj.ID">Delete</a>
+                </td>
+        </tr>
+      }
+  </tbody>
+</table>
